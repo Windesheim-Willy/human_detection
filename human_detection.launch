@@ -1,0 +1,5 @@
+<launch>
+
+	<node name="main" pkg="human_detection" type="main" args="" output="screen" />
+
+</launch>
