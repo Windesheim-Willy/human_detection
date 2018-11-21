@@ -1,18 +1,47 @@
+#include <cmath>
+
 #include "TrackedRectangle.hpp"
+#include "opencv2/video/tracking.hpp"
 
-TrackedRectangle::TrackedRectangle(int x, int y, int width, int height) 
+using namespace cv;
+
+TrackedRectangle::TrackedRectangle(Point tl, Point br) 
 {
-    this->x = x;
-    this->y = y;
-    this->width = width;
-    this->height = height;
-
+    this->tl = tl;
+    this->br = br;
+    
     this->lastSeenTick = 0;
     this->seenTicks = 0;
 }
 
-void TrackedRectangle::RegisterTick(int tick)
+cv::Point TrackedRectangle::tl() 
+{
+    return this->tl;
+}
+
+cv::Point TrackedRectangle::br()
+{
+    return this->br;
+}
+
+void TrackedRectangle::registerTick(int tick)
 {
     this->seenTicks++;
     this->lastSeenTick = tick;
+}
+
+bool TrackedRectangle::withinOffset(Point tl, Point br)
+{
+    // Check if its an exact match
+    if (this->tl == tl && this->br == br) 
+    {
+        return true;
+    }
+
+    int diffInX = abs(this->tl.x - tl.x);
+    int diffInY = abs(this->tl.y - tl.y);
+
+    
+
+    return false;
 }

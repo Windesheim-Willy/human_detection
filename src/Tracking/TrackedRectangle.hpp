@@ -1,19 +1,23 @@
-#ifndef HUMAN_DETECT_RECTANGLE_TRACKING
-#define HUMAN_DETECT_RECTANGLE_TRACKING
+#ifndef HUMAN_DETECT_TRACKED_RECTANGLE
+#define HUMAN_DETECT_TRACKED_RECTANGLE
+
+#include "opencv2/video/tracking.hpp"
 
 class TrackedRectangle
 {
     public:
-        TrackedRectangle(int x, int y, int width, int height);
+        TrackedRectangle(Point tl, Point br);
 
-        void RegisterTick();
-        bool Valid(int currentTick);
+
+        bool withinOffset(Point tl, Point br);
+        void registerTick(int tick);
+
+        Point tl;
+        Point br;
 
     private:
         int lastSeenTick;
         int seenTicks;
-
-        int x, y, width, height;
 };
 
 #endif

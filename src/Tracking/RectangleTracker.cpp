@@ -5,14 +5,24 @@ RectangleTracker::RectangleTracker()
     this->ticks = 0;
 }
 
-void RectangleTracker::Tick()
+void RectangleTracker::tick()
 {
     this->ticks++;
+
+    this->trackedRectangles = new vector<TrackedRectangle>();
 }
 
-void RectangleTracker::Update(vector<Rect> &objects)
+void RectangleTracker::update(vector<Rect> &foundRectangles)
 {
-    for (int i = 0; i < objects.size(); i++) {
+    for (int f = 0; f < foundRectangles.size(); f++) {
+
+
+        
 
     }
+}
+
+vector<TrackedRectangle>* RectangleTracker::getTrackedRectangles()
+{
+    return this->trackedRectangles;
 }

@@ -17,7 +17,7 @@ using namespace std;
 int main(int argc, const char** argv)
 {
         // prepare video input
-        VideoCapture cap("/dev/video1");
+        VideoCapture cap("/dev/video0");
 
         CascadeClassifier detectBody;
         string cascade = "opencv/cascade.xml";
@@ -27,11 +27,13 @@ int main(int argc, const char** argv)
 
         if (cascadeLoaded == false) {
                 cout << "failed to load body detection";
+                return -1;
         }
 
         // vars used in for
         char buffer[126];
         RectangleTracker* tracker = new RectangleTracker();
+        vector<TrackedRectangle>* trackedRectangle = tracker->getTrackedRectangles();
 
         // Basic video input loop
         for (;;)
@@ -77,15 +79,21 @@ int main(int argc, const char** argv)
                                 Size(555, 555)  // max
                         );
 
-                        // Draw results from detectorBody into original colored image
-                        if (humans.size() > 0) {
-                                for (int gg = 0; gg < humans.size(); gg++) {
-                                        rectangle(original, humans[gg].tl(), humans[gg].br(), Scalar(0,0,255), 2, 8, 0);
+                        tracker->update(humans);
 
-                                        sprintf(buffer, "h:%d, w:%d", humans[gg].height, humans[gg].width);
-                                        putText(original, buffer, Point(400, 30 * (gg+1)), 1, 2, Scalar(255, 255, 255), 2, 8, 0);
-                                }
+
+                        for (int f = 0; f < trackedRectangle->size(); f++) {
+                                rectangle(original, trackedRectangle[f].tl(), trackedRectangle[f].br(), Scalar(0,0,255), 2, 8, 0);
                         }
+                        // Draw results from detectorBody into original colored image
+                        // if (humans.size() > 0) {
+                        //         for (int gg = 0; gg < humans.size(); gg++) {
+                        //                 rectangle(original, humans[gg].tl(), humans[gg].br(), Scalar(0,0,255), 2, 8, 0);
+
+                        //                 sprintf(buffer, "h:%d, w:%d", humans[gg].height, humans[gg].width);
+                        //                 putText(original, buffer, Point(400, 30 * (gg+1)), 1, 2, Scalar(255, 255, 255), 2, 8, 0);
+                        //         }
+                        // }
 
                         // measure time as current - begin_time
                         clock_t diff = clock() - begin_time;
