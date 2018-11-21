@@ -9,20 +9,20 @@ void RectangleTracker::tick()
 {
     this->ticks++;
 
-    this->trackedRectangles = new vector<TrackedRectangle>();
+    this->trackedRectangles = new vector<TrackedRectangle*>();
 }
 
 void RectangleTracker::update(vector<Rect> &foundRectangles)
 {
+    // o2 incoming!
     for (int f = 0; f < foundRectangles.size(); f++) {
-
 
         
 
     }
 }
 
-vector<TrackedRectangle>* RectangleTracker::getTrackedRectangles()
+vector<TrackedRectangle*> &RectangleTracker::getTrackedRectangles()
 {
     return this->trackedRectangles;
 }

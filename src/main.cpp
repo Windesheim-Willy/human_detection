@@ -32,8 +32,8 @@ int main(int argc, const char** argv)
 
         // vars used in for
         char buffer[126];
-        RectangleTracker* tracker = new RectangleTracker();
-        vector<TrackedRectangle>* trackedRectangle = tracker->getTrackedRectangles();
+        RectangleTracker tracker;
+        vector<TrackedRectangle*> trackedRectangle = tracker.getTrackedRectangles();
 
         // Basic video input loop
         for (;;)
@@ -79,12 +79,13 @@ int main(int argc, const char** argv)
                                 Size(555, 555)  // max
                         );
 
-                        tracker->update(humans);
+                        tracker.update(humans);
 
-
-                        for (int f = 0; f < trackedRectangle->size(); f++) {
-                                rectangle(original, trackedRectangle[f].tl(), trackedRectangle[f].br(), Scalar(0,0,255), 2, 8, 0);
+                       
+                        for (int f = 0; f < trackedRectangle.size(); f++) {
+                                rectangle(original, trackedRectangle[f]->tl, trackedRectangle[f]->br, Scalar(0,0,255), 2, 8, 0);
                         }
+
                         // Draw results from detectorBody into original colored image
                         // if (humans.size() > 0) {
                         //         for (int gg = 0; gg < humans.size(); gg++) {

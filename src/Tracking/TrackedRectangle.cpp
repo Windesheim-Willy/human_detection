@@ -14,16 +14,6 @@ TrackedRectangle::TrackedRectangle(Point tl, Point br)
     this->seenTicks = 0;
 }
 
-cv::Point TrackedRectangle::tl() 
-{
-    return this->tl;
-}
-
-cv::Point TrackedRectangle::br()
-{
-    return this->br;
-}
-
 void TrackedRectangle::registerTick(int tick)
 {
     this->seenTicks++;

@@ -18,11 +18,11 @@ public:
     void tick();
     void update(vector<Rect> &foundRectangles);
 
-    vector<TrackedRectangle> *getTrackedRectangles();
+    vector<TrackedRectangle*> &getTrackedRectangles();
 
 private:
     int ticks;
-    vector<TrackedRectangle> *trackedRectangles;
+    vector<TrackedRectangle*> *trackedRectangles;
 };
 
 #endif
