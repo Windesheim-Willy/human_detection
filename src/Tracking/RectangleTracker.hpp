@@ -5,7 +5,7 @@
 #include <stdio.h>
 
 #include "opencv2/video/tracking.hpp"
-#include "TrackedRectangle.hpp"
+#include "Rectangle.hpp"
 
 using namespace cv;
 using namespace std;
@@ -14,15 +14,14 @@ class RectangleTracker
 {
 public:
     RectangleTracker();
-
-    void tick();
+    
     void update(vector<Rect> &foundRectangles);
 
-    vector<TrackedRectangle*> &getTrackedRectangles();
+    vector<Rectangle*> &getTrackedRectangles();
 
 private:
     int ticks;
-    vector<TrackedRectangle*> *trackedRectangles;
+    vector<Rectangle*> trackedRectangles;
 };
 
 #endif

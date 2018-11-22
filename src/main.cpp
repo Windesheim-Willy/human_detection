@@ -33,7 +33,8 @@ int main(int argc, const char** argv)
         // vars used in for
         char buffer[126];
         RectangleTracker tracker;
-        vector<TrackedRectangle*> trackedRectangle = tracker.getTrackedRectangles();
+        // vector<Rectangle*> trackedRectangle = tracker.getTrackedRectangles();
+        vector<Rect> humans;
 
         // Basic video input loop
         for (;;)
@@ -48,9 +49,6 @@ int main(int argc, const char** argv)
                         // Just for measure time
                         const clock_t begin_time = clock();
 
-                        // Store results in these 2 vectors
-                        vector<Rect> humans;
-
                         // prepare 2 Mat container
                         Mat img;
                         Mat original;
@@ -59,7 +57,7 @@ int main(int argc, const char** argv)
                         cap.retrieve(img, CV_CAP_OPENNI_BGR_IMAGE);
 
                         // Resize image if you want with same size as your VideoWriter
-                        resize(img, img, Size(640, 480));
+                        resize(img, img, Size(800, 600));
 
                         // Store original colored image
                         img.copyTo(original);
@@ -80,21 +78,17 @@ int main(int argc, const char** argv)
                         );
 
                         tracker.update(humans);
-
                        
-                        for (int f = 0; f < trackedRectangle.size(); f++) {
-                                rectangle(original, trackedRectangle[f]->tl, trackedRectangle[f]->br, Scalar(0,0,255), 2, 8, 0);
+                        for (int f = 0; f < tracker.getTrackedRectangles().size(); f++) {
+                                Rectangle *rect = tracker.getTrackedRectangles().at(f);
+                                rectangle(
+                                        original, 
+                                        rect->tl, 
+                                        rect->br, 
+                                        Scalar(0,0,255), 
+                                        2, 8, 0
+                                );
                         }
-
-                        // Draw results from detectorBody into original colored image
-                        // if (humans.size() > 0) {
-                        //         for (int gg = 0; gg < humans.size(); gg++) {
-                        //                 rectangle(original, humans[gg].tl(), humans[gg].br(), Scalar(0,0,255), 2, 8, 0);
-
-                        //                 sprintf(buffer, "h:%d, w:%d", humans[gg].height, humans[gg].width);
-                        //                 putText(original, buffer, Point(400, 30 * (gg+1)), 1, 2, Scalar(255, 255, 255), 2, 8, 0);
-                        //         }
-                        // }
 
                         // measure time as current - begin_time
                         clock_t diff = clock() - begin_time;
@@ -104,11 +98,15 @@ int main(int argc, const char** argv)
 
                         // display TIME ms on original image
                         putText(original, buffer, Point(100, 20), 1, 2, Scalar(255, 255, 255), 2, 8, 0);
+
+                        sprintf(buffer, "%d", tracker.getTrackedRectangles().size());
+                        putText(original, buffer, Point(0, 20), 1, 2, Scalar(255, 255, 255), 2, 8, 0);
                         
                         // draw results
                         namedWindow("prew", WINDOW_AUTOSIZE);
                         imshow("prew", original);
 
+                        // tracker.tick();
                         int key1 = waitKey(10);
                 }
         }
