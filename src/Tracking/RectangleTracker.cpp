@@ -50,7 +50,7 @@ void RectangleTracker::update(vector<Rect> &foundRectangles)
     }
 
     for (vector<Rectangle*>::iterator it = trackedRectangles.begin(); it != trackedRectangles.end();) {
-        if (ticks - (*it)->getLastSeenTick() > 50) {
+        if (ticks - (*it)->getLastSeenTick() > 5) {
             trackedRectangles.erase(it);
         } else {
             ++it;

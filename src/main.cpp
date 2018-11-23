@@ -53,13 +53,9 @@ int main(int argc, const char** argv)
                         Mat img;
                         Mat original;
 
-                        // capture frame from video file
+                        // capture frame from video stream
                         cap.retrieve(img, CV_CAP_OPENNI_BGR_IMAGE);
-
-                        // Resize image if you want with same size as your VideoWriter
                         resize(img, img, Size(800, 600));
-
-                        // Store original colored image
                         img.copyTo(original);
 
                         // color to gray image
@@ -94,13 +90,11 @@ int main(int argc, const char** argv)
                         clock_t diff = clock() - begin_time;
 
                         // convert time into string
-                        sprintf(buffer, "0.%d", (int) diff);
+                        sprintf(buffer, "time 0.%ds", (int) diff);
+                        putText(original, buffer, Point(100, 25), 1, 2, Scalar(255, 255, 255), 2, 8, 0);
 
-                        // display TIME ms on original image
-                        putText(original, buffer, Point(100, 20), 1, 2, Scalar(255, 255, 255), 2, 8, 0);
-
-                        sprintf(buffer, "%d", tracker.getTrackedRectangles().size());
-                        putText(original, buffer, Point(0, 20), 1, 2, Scalar(255, 255, 255), 2, 8, 0);
+                        sprintf(buffer, "Humans: %d", tracker.getTrackedRectangles().size());
+                        putText(original, buffer, Point(10, 25), 1, 2, Scalar(255, 255, 255), 2, 8, 0);
                         
                         // draw results
                         namedWindow("prew", WINDOW_AUTOSIZE);
