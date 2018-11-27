@@ -21,6 +21,7 @@ class Rectangle
         void registerTick(int tick, bool seen);
 
         int getId();
+        int getDistance();
 
         Point tl;
         Point br;

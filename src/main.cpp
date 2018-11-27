@@ -17,7 +17,7 @@ using namespace std;
 int main(int argc, const char** argv)
 {
         // prepare video input
-        VideoCapture cap("test-3-pers.mp4");
+        VideoCapture cap("test-afstand.mp4");
 
         CascadeClassifier detectBody;
         string cascade = "opencv/haar-upper-body.xml";
@@ -96,6 +96,9 @@ int main(int argc, const char** argv)
 
                                 sprintf(buffer, "%i", rect->accuracy());
                                 putText(original, buffer, Point(rect->tl.x, rect->tl.y + 80), 1, 2, Scalar(85, 150, 85), 2, 2, 0);
+
+                                sprintf(buffer, "%i cm", rect->getDistance());
+                                putText(original, buffer, Point(rect->tl.x, rect->tl.y + 110), 1, 2, Scalar(85, 150, 85), 2, 2, 0);
                         }
 
                         // measure time as current - begin_time

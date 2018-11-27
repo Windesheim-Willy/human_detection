@@ -30,7 +30,6 @@ void Rectangle::registerTick(int tick, bool seen)
 
 int Rectangle::accuracy()
 {
-    // std::cout << this->id << ": " << this->missedTicks << "-" << this->seenTicks << "\r\n";
     if (this->missedTicks < 2 && this->seenTicks < 2) {
         return 100;
     }
@@ -40,6 +39,11 @@ int Rectangle::accuracy()
     }
 
     return (int) ((float) this->missedTicks / (float) this->seenTicks * 100);
+}
+
+int Rectangle::getDistance()
+{
+    return (300 - (this->br.y - this->tl.y)) * 2;
 }
 
 bool Rectangle::withinOffset(const Rect &rect)
