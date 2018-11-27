@@ -33,7 +33,6 @@ int main(int argc, const char** argv)
         // vars used in for
         char buffer[126];
         RectangleTracker tracker;
-        // vector<Rectangle*> trackedRectangle = tracker.getTrackedRectangles();
         vector<Rect> humans;
 
         // Basic video input loop
@@ -64,7 +63,7 @@ int main(int argc, const char** argv)
                         detectBody.detectMultiScale(
                                 img, 
                                 humans, 
-                                1.2, 
+                                1.1, 
                                 3, 
                                 CASCADE_DO_CANNY_PRUNING,                       
                                 Size(70, 70),    // min
@@ -93,10 +92,9 @@ int main(int argc, const char** argv)
                                         rect->br.y - rect->tl.y,
                                         rect->br.x - rect->tl.x
                                 );
-
                                 putText(original, buffer, Point(rect->tl.x, rect->tl.y + 50), 1, 2, Scalar(85, 150, 85), 2, 2, 0);
-                                sprintf(buffer, "%d", rect->accuracy());
 
+                                sprintf(buffer, "%i", rect->accuracy());
                                 putText(original, buffer, Point(rect->tl.x, rect->tl.y + 80), 1, 2, Scalar(85, 150, 85), 2, 2, 0);
                         }
 

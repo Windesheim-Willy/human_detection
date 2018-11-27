@@ -10,7 +10,7 @@ using namespace cv;
 class Rectangle
 {
     public:
-        Rectangle(const Rect &rect, int id);
+        Rectangle(const Rect &rect, int id, int tick);
 
         int getLastSeenTick();
         int accuracy();
@@ -26,7 +26,7 @@ class Rectangle
         Point br;
 
     private:
-        int lastTick, firstTick, seenTicks, missedTicks, id;
+        int lastSeenTick, seenTicks, missedTicks, id;
 };
 
 #endif

@@ -7,23 +7,22 @@
 
 using namespace cv;
 
-Rectangle::Rectangle(const Rect &rect, int id)
+Rectangle::Rectangle(const Rect &rect, int id, int tick)
 {
     this->tl = rect.tl();
     this->br = rect.br();
     this->id = id;
+
+    this->seenTicks = 0;
+    this->missedTicks = 0;
+    this->lastSeenTick = tick;
 }
 
 void Rectangle::registerTick(int tick, bool seen)
 {
-    this->lastTick = tick;
-
-    if (firstTick == 0) {
-        firstTick = tick;
-    }
-
     if (seen) {
         this->seenTicks++;
+        this->lastSeenTick = tick;
     } else {
         this->missedTicks++;
     }
@@ -31,10 +30,16 @@ void Rectangle::registerTick(int tick, bool seen)
 
 int Rectangle::accuracy()
 {
-    int x= (int) this->missedTicks / this->seenTicks;
+    // std::cout << this->id << ": " << this->missedTicks << "-" << this->seenTicks << "\r\n";
+    if (this->missedTicks < 2 && this->seenTicks < 2) {
+        return 100;
+    }
 
-    std::cout << this->id << this->seenTicks << "|" << this->missedTicks << "=" << x << "\r\n";
-    return x; 
+    if (this->missedTicks > this->seenTicks) {        
+        return -1;
+    }
+
+    return (int) ((float) this->missedTicks / (float) this->seenTicks * 100);
 }
 
 bool Rectangle::withinOffset(const Rect &rect)
@@ -53,7 +58,7 @@ bool Rectangle::withinOffset(const Rect &rect)
 
     if (
         tlDiffInX < ALLOWED_OFFSET && tlDiffInY < ALLOWED_OFFSET
-        && 
+        ||
         brDiffInX < ALLOWED_OFFSET && brDiffInY < ALLOWED_OFFSET    
     ) {
         return true;
@@ -72,7 +77,7 @@ void Rectangle::adjustPosition(const Rect &rect)
 
 int Rectangle::getLastSeenTick()
 {
-    return this->lastTick;
+    return this->lastSeenTick;
 }
 
 int Rectangle::getId()

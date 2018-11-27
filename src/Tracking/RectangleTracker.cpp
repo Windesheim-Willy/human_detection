@@ -17,7 +17,7 @@ void RectangleTracker::update(vector<Rect> &foundRectangles)
 
     // Empty set but one rectangle
     if (this->trackedRectangles.size() == 0 && foundRectangles.size() == 1) {
-        Rectangle *rect = new Rectangle(foundRectangles[0], ++this->detectedCount);
+        Rectangle *rect = new Rectangle(foundRectangles[0], ++this->detectedCount, ticks);
         this->trackedRectangles.push_back(rect);
         return;
     }
@@ -43,7 +43,7 @@ void RectangleTracker::update(vector<Rect> &foundRectangles)
         }
 
         if (seen == false) {
-            Rectangle *rect = new Rectangle(foundRectangles[f], ++this->detectedCount);
+            Rectangle *rect = new Rectangle(foundRectangles[f], ++this->detectedCount, ticks);
             this->trackedRectangles.push_back(rect);
         }
     }
@@ -55,8 +55,8 @@ void RectangleTracker::update(vector<Rect> &foundRectangles)
     }
 
     for (vector<Rectangle*>::iterator it = trackedRectangles.begin(); it != trackedRectangles.end();) {
-        if (ticks - (*it)->getLastSeenTick() > 10) {
-            Rectangle * toDelete = (*it);
+        if ((*it)->accuracy() < 25 && (ticks - (*it)->getLastSeenTick() > 10)) {
+            Rectangle *toDelete = (*it);
             trackedRectangles.erase(it);
 
             // Lets save some memory for those in need :-)
