@@ -17,7 +17,7 @@ using namespace std;
 int main(int argc, const char** argv)
 {
         // prepare video input
-        VideoCapture cap("test-afstand.mp4");
+        VideoCapture cap("test-2-pers.mp4");
 
         CascadeClassifier detectBody;
         string cascade = "opencv/haar-upper-body.xml";
@@ -67,7 +67,7 @@ int main(int argc, const char** argv)
                                 3, 
                                 CASCADE_DO_CANNY_PRUNING,                       
                                 Size(70, 70),    // min
-                                Size(640, 480)  // max
+                                Size(400, 350)  // max
                         );
 
                         tracker.update(humans);
@@ -86,13 +86,13 @@ int main(int argc, const char** argv)
                                 sprintf(buffer, "id: %d", rect->getId());
                                 putText(original, buffer, Point(rect->tl.x, rect->tl.y + 20), 1, 2, Scalar(85, 150, 85), 2, 2, 0);
 
-                                sprintf(
-                                        buffer,
-                                        "h:%d w:%d",
-                                        rect->br.y - rect->tl.y,
-                                        rect->br.x - rect->tl.x
-                                );
-                                putText(original, buffer, Point(rect->tl.x, rect->tl.y + 50), 1, 2, Scalar(85, 150, 85), 2, 2, 0);
+                                // sprintf(
+                                //         buffer,
+                                //         "h:%d w:%d",
+                                //         rect->br.y - rect->tl.y,
+                                //         rect->br.x - rect->tl.x
+                                // );
+                                // putText(original, buffer, Point(rect->tl.x, rect->tl.y + 50), 1, 2, Scalar(85, 150, 85), 2, 2, 0);
 
                                 sprintf(buffer, "%i", rect->accuracy());
                                 putText(original, buffer, Point(rect->tl.x, rect->tl.y + 80), 1, 2, Scalar(85, 150, 85), 2, 2, 0);
