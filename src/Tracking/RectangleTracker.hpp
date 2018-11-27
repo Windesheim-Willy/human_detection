@@ -16,11 +16,13 @@ public:
     RectangleTracker();
     
     void update(vector<Rect> &foundRectangles);
+    int getDetectedCount();
 
     vector<Rectangle*> &getTrackedRectangles();
 
 private:
     int ticks;
+    int detectedCount;
     vector<Rectangle*> trackedRectangles;
 };
 

@@ -1,24 +1,40 @@
 #include <cmath>
+#include <iostream>
+#include <stdio.h>
 
 #include "Rectangle.hpp"
 #include "opencv2/video/tracking.hpp"
 
 using namespace cv;
 
-Rectangle::Rectangle(const Rect &rect)
+Rectangle::Rectangle(const Rect &rect, int id)
 {
     this->tl = rect.tl();
     this->br = rect.br();
+    this->id = id;
 }
 
-void Rectangle::registerTick(int tick)
+void Rectangle::registerTick(int tick, bool seen)
 {
-    this->seenTicks++;
     this->lastTick = tick;
 
     if (firstTick == 0) {
         firstTick = tick;
     }
+
+    if (seen) {
+        this->seenTicks++;
+    } else {
+        this->missedTicks++;
+    }
+}
+
+int Rectangle::accuracy()
+{
+    int x= (int) this->missedTicks / this->seenTicks;
+
+    std::cout << this->id << this->seenTicks << "|" << this->missedTicks << "=" << x << "\r\n";
+    return x; 
 }
 
 bool Rectangle::withinOffset(const Rect &rect)
@@ -48,11 +64,6 @@ bool Rectangle::withinOffset(const Rect &rect)
 
 void Rectangle::adjustPosition(const Rect &rect)
 {
-    // this->tl.y = this->tl.y + ((this->tl.y - rect.tl().y) / 2);
-    // this->tl.x = this->tl.x + ((this->tl.x - rect.tl().x) / 2);
-    // this->br.x = this->br.x + ((this->br.x - rect.br().x) / 2);
-    // this->br.y = this->br.y + ((this->br.y - rect.br().y) / 2); 
-
     this->tl.y = rect.tl().y;
     this->tl.x = rect.tl().x;
     this->br.x = rect.br().x;
@@ -62,4 +73,9 @@ void Rectangle::adjustPosition(const Rect &rect)
 int Rectangle::getLastSeenTick()
 {
     return this->lastTick;
+}
+
+int Rectangle::getId()
+{
+    return this->id;
 }
