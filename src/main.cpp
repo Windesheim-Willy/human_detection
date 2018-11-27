@@ -17,7 +17,7 @@ using namespace std;
 int main(int argc, const char** argv)
 {
         // prepare video input
-        VideoCapture cap("/dev/video0");
+        VideoCapture cap("test.mov");
 
         CascadeClassifier detectBody;
         string cascade = "opencv/cascade.xml";
