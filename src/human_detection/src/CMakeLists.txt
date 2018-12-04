@@ -12,11 +12,32 @@ project(human_detection)
 find_package(catkin REQUIRED COMPONENTS
   	roscpp
   	cv_bridge
+    rospy
+    std_msgs
+    genmsg
+    message_generation
+    OpenCV
 )
 
-find_package(OpenCV REQUIRED)
+## Add project generated messages (do so before building own code)
+add_message_files(
+  FILES
+  Person.msg
+)
+
+generate_messages(
+  DEPENDENCIES
+  std_msgs 
+)
+
+catkin_package(
+  CATKIN_DEPENDS 
+  message_runtime
+  human_detection_generate_messages_cpp
+)
 
 include_directories(
+  include
   ${catkin_INCLUDE_DIRS}
   ${OpenCV_INCLUDE_DIRS}
 )
@@ -25,8 +46,14 @@ add_executable(human_detection
 
 	main.cpp
 	Tracking/Rectangle.cpp
-    Tracking/RectangleTracker.cpp
-    OpenCVTracking.cpp
+  Tracking/RectangleTracker.cpp
+  OpenCVTracking.cpp
+)
+
+add_dependencies(human_detection 
+
+  human_detection_generate_messages_cpp 
+  ${catkin_EXPORTED_TARGETS}
 )
 
 target_link_libraries(human_detection 
