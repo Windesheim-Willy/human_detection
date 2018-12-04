@@ -1,5 +1,4 @@
 #include <cmath>
-#include <iostream>
 #include <stdio.h>
 
 #include "Rectangle.hpp"
@@ -28,7 +27,7 @@ void Rectangle::registerTick(int tick, bool seen)
         this->missedTicks++;
     }
 
-    this->lastTick;
+    this->lastTick = tick;
 }
 
 int Rectangle::accuracy()
@@ -37,7 +36,7 @@ int Rectangle::accuracy()
         return 100;
     }
 
-    return (int) ((float) this->missedTicks / (float) this->seenTicks * 100);
+    return (int) ((float) (seenTicks - missedTicks) / (float) seenTicks * 100); 
 }
 
 int Rectangle::getDistance()

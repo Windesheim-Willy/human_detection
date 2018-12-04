@@ -1,5 +1,4 @@
 #include "RectangleTracker.hpp"
-#include <iostream>
 
 RectangleTracker::RectangleTracker()
 {
@@ -33,7 +32,7 @@ void RectangleTracker::update(vector<Rect> &foundRectangles)
 
             if (this->trackedRectangles[t]->withinOffset(foundRectangles[f])) {
                 this->trackedRectangles[t]->adjustPosition(foundRectangles[f]);
-                this->trackedRectangles[t]->registerTick(this->ticks, true);
+                this->trackedRectangles[t]->registerTick(ticks, true);
 
                 seen = true;
 
@@ -59,13 +58,11 @@ void RectangleTracker::update(vector<Rect> &foundRectangles)
         Rectangle *rectToDelete = (*it);
 
         if (rectToDelete->accuracy() < 30) {    
-            cout << rectToDelete->accuracy() << "\r\n";
             trackedRectangles.erase(it);
             delete rectToDelete;
-        // } else if ((ticks - (*it)->getLastTick() > 50)) {
-        //     cout << "dlete tick\r\n";
-        //     trackedRectangles.erase(it);
-        //     delete rectToDelete;
+        } else if ((ticks - (*it)->getLastTick() > 50)) {
+            trackedRectangles.erase(it);
+            delete rectToDelete;
         } else {
             ++it;
         }

@@ -96,9 +96,11 @@ void OpenCVTracking::drawRectange(Mat &image, Rectangle *rect)
         2, 8, 0
     );
 
+    // ID
     sprintf(buffer, "id: %i", rect->getId());
     putText(image, buffer, Point(rect->tl.x, rect->tl.y + 20), 1, 2, Scalar(85, 150, 85), 2, 2, 0);
 
+    // Height, width
     sprintf(
         buffer,
         "h:%d w:%d",
@@ -107,9 +109,11 @@ void OpenCVTracking::drawRectange(Mat &image, Rectangle *rect)
     );
     putText(image, buffer, Point(rect->tl.x, rect->tl.y + 50), 1, 2, Scalar(85, 150, 85), 2, 2, 0);
 
+    // Accuracy
     sprintf(buffer, "%i", rect->accuracy());
     putText(image, buffer, Point(rect->tl.x, rect->tl.y + 80), 1, 2, Scalar(85, 150, 85), 2, 2, 0);
 
+    // Distance
     sprintf(buffer, "%i cm", rect->getDistance());
     putText(image, buffer, Point(rect->tl.x, rect->tl.y + 110), 1, 2, Scalar(85, 150, 85), 2, 2, 0);
 }

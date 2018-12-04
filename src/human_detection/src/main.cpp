@@ -1,4 +1,3 @@
-#include <unistd.h>
 #include "OpenCVTracking.hpp"
 
 int main(int argc, const char** argv)
@@ -7,9 +6,6 @@ int main(int argc, const char** argv)
 
     while(tracker.isValid()) 
     {
-        tracker.process();      
-
-        usleep(500000);
-        
+        tracker.process();          
     }
 }
