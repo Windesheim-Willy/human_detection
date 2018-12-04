@@ -3,6 +3,8 @@
 #include "OpenCVTracking.hpp"
 #include "human_detection/Person.h"
 
+using namespace human_detection;
+
 int main(int argc, char **argv)
 {
     ros::init(argc, argv, "human_dect");
