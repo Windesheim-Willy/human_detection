@@ -16,6 +16,7 @@ Rectangle::Rectangle(const Rect &rect, int id, int tick)
     this->seenTicks = 0;
     this->missedTicks = 0;
     this->lastSeenTick = tick;
+    this->lastTick = tick;
 }
 
 void Rectangle::registerTick(int tick, bool seen)
@@ -26,16 +27,14 @@ void Rectangle::registerTick(int tick, bool seen)
     } else {
         this->missedTicks++;
     }
+
+    this->lastTick;
 }
 
 int Rectangle::accuracy()
 {
-    if (this->missedTicks < 2 && this->seenTicks < 2) {
+    if (this->missedTicks < 5 && this->seenTicks < 5) {
         return 100;
-    }
-
-    if (this->missedTicks > this->seenTicks) {        
-        return -1;
     }
 
     return (int) ((float) this->missedTicks / (float) this->seenTicks * 100);
@@ -79,9 +78,9 @@ void Rectangle::adjustPosition(const Rect &rect)
     this->br.y = rect.br().y; 
 }
 
-int Rectangle::getLastSeenTick()
+int Rectangle::getLastTick()
 {
-    return this->lastSeenTick;
+    return this->lastTick;
 }
 
 int Rectangle::getId()

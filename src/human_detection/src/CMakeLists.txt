@@ -26,6 +26,7 @@ add_executable(human_detection
 	main.cpp
 	Tracking/Rectangle.cpp
     Tracking/RectangleTracker.cpp
+    OpenCVTracking.cpp
 )
 
 target_link_libraries(human_detection 

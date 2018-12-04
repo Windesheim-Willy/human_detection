@@ -49,18 +49,23 @@ void RectangleTracker::update(vector<Rect> &foundRectangles)
     }
 
     for (int t = 0; t < this->trackedRectangles.size(); t++) {
-        if (this->trackedRectangles[t]->getLastSeenTick() != ticks) {
+        if (this->trackedRectangles[t]->getLastTick() != ticks) {
             this->trackedRectangles[t]->registerTick(ticks, false);
         }
     }
 
     for (vector<Rectangle*>::iterator it = trackedRectangles.begin(); it != trackedRectangles.end();) {
-        if ((*it)->accuracy() < 25 && (ticks - (*it)->getLastSeenTick() > 10)) {
-            Rectangle *toDelete = (*it);
-            trackedRectangles.erase(it);
 
-            // Lets save some memory for those in need :-)
-            delete toDelete;
+        Rectangle *rectToDelete = (*it);
+
+        if (rectToDelete->accuracy() < 30) {    
+            cout << rectToDelete->accuracy() << "\r\n";
+            trackedRectangles.erase(it);
+            delete rectToDelete;
+        // } else if ((ticks - (*it)->getLastTick() > 50)) {
+        //     cout << "dlete tick\r\n";
+        //     trackedRectangles.erase(it);
+        //     delete rectToDelete;
         } else {
             ++it;
         }

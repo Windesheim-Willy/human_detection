@@ -11,23 +11,23 @@ class Rectangle
 {
     public:
         Rectangle(const Rect &rect, int id, int tick);
-
-        int getLastSeenTick();
+        
         int accuracy();
 
         bool withinOffset(const Rect &rect);
         void adjustPosition(const Rect &rect);
 
-        void registerTick(int tick, bool seen);
+        void registerTick(int tick, bool seen);        
 
         int getId();
         int getDistance();
+        int getLastTick();
 
         Point tl;
         Point br;
 
     private:
-        int lastSeenTick, seenTicks, missedTicks, id;
+        int lastSeenTick, seenTicks, missedTicks, lastTick, id;
 };
 
 #endif
