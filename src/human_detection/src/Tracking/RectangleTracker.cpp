@@ -60,7 +60,7 @@ void RectangleTracker::update(vector<Rect> &foundRectangles)
         if (rectToDelete->accuracy() < 30) {    
             trackedRectangles.erase(it);
             delete rectToDelete;
-        } else if ((ticks - (*it)->getLastTick() > 50)) {
+        } else if ((ticks - (*it)->getLastSeenTick() > 50)) {
             trackedRectangles.erase(it);
             delete rectToDelete;
         } else {

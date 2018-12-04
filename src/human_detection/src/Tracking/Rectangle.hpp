@@ -22,6 +22,7 @@ class Rectangle
         int getId();
         int getDistance();
         int getLastTick();
+        int getLastSeenTick();
 
         Point tl;
         Point br;

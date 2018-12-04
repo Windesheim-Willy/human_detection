@@ -82,6 +82,11 @@ int Rectangle::getLastTick()
     return this->lastTick;
 }
 
+int Rectangle::getLastSeenTick()
+{
+    return this->lastSeenTick;
+}
+
 int Rectangle::getId()
 {
     return this->id;
