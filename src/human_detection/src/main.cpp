@@ -9,7 +9,7 @@ int main(int argc, const char** argv)
     {
         tracker.process();      
 
-        usleep(5000);
+        usleep(500000);
         
     }
 }
