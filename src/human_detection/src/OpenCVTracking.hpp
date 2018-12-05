@@ -20,6 +20,8 @@ class OpenCVTracking
         bool isValid();
         void process();
 
+        RectangleTracker &getTracker();
+
     protected:
         void drawRectange(Mat &image, Rectangle *rect);                
 

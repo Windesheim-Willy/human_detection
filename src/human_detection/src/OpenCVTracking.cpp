@@ -117,3 +117,8 @@ void OpenCVTracking::drawRectange(Mat &image, Rectangle *rect)
     sprintf(buffer, "%i cm", rect->getDistance());
     putText(image, buffer, Point(rect->tl.x, rect->tl.y + 110), 1, 2, Scalar(85, 150, 85), 2, 2, 0);
 }
+
+RectangleTracker &OpenCVTracking::getTracker()
+{
+    return this->bodyTracker;
+}
