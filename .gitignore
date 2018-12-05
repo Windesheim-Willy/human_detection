@@ -156,5 +156,3 @@ qtcreator-*
 
 # Catkin custom files
 CATKIN_IGNORE
-
-test-*.mp4
