@@ -23,6 +23,7 @@ class OpenCVTracking
         RectangleTracker &getTracker();
 
     protected:
+        void drawPerformance(Mat &image, float time);
         void drawRectange(Mat &image, Rectangle *rect);                
 
     private:

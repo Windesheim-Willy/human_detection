@@ -1,3 +1,4 @@
+#include "main.h"
 #include "OpenCVTracking.hpp"
 
 #include "opencv2/highgui.hpp"
@@ -64,27 +65,36 @@ void OpenCVTracking::process()
         
         for (int f = 0; f < bodyTracker.getTrackedRectangles().size(); f++) {
             Rectangle *rect = bodyTracker.getTrackedRectangles().at(f);
-            this->drawRectange(original, rect);                
+
+            if (DEBUG) {
+                this->drawRectange(original, rect);
+            }
         }
 
-        // measure time as current - begin_time
-        clock_t diff = clock() - begin_time;
-
-        // convert time into string
-        sprintf(buffer, "time %.4fs", ((float) diff) / CLOCKS_PER_SEC);
-        putText(original, buffer, Point(400, 25), 1, 2, Scalar(255, 255, 255), 2, 8, 0);
-
-        sprintf(buffer, "Humans: %i (%i)", (int) bodyTracker.getTrackedRectangles().size(), bodyTracker.getDetectedCount());
-        putText(original, buffer, Point(10, 25), 1, 2, Scalar(255, 255, 255), 2, 8, 0);
-        
-        // draw results
-        namedWindow("prev", WINDOW_AUTOSIZE);
-        imshow("prev", original);
-
-        int key1 = waitKey(1);
+        if (DEBUG) {
+            this->drawPerformance(original, begin_time);
+        }
     }
 }
 
+void OpenCVTracking::drawPerformance(Mat &image, float begin_time)
+{
+    // measure time as current - begin_time
+    clock_t diff = clock() - begin_time;
+
+    // convert time into string
+    sprintf(buffer, "time %.4fs", ((float) diff) / CLOCKS_PER_SEC);
+    putText(image, buffer, Point(400, 25), 1, 2, Scalar(255, 255, 255), 2, 8, 0);
+
+    sprintf(buffer, "Humans: %i (%i)", (int) bodyTracker.getTrackedRectangles().size(), bodyTracker.getDetectedCount());
+    putText(image, buffer, Point(10, 25), 1, 2, Scalar(255, 255, 255), 2, 8, 0);
+    
+    // draw results
+    namedWindow("prev", WINDOW_AUTOSIZE);
+    imshow("prev", image);
+
+    int key1 = waitKey(1);
+}
 
 void OpenCVTracking::drawRectange(Mat &image, Rectangle *rect) 
 {
