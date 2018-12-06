@@ -25,7 +25,7 @@ apt-get install -y \
   python-rosdep \
   python-rosinstall \
   python-vcstools \
-  python-rosinstall-generator
+  python-rosinstall-generator \
   ros-kinetic-opencv3 \
   ros-kinetic-cv-bridge \
   ros-kinetic-desktop  
@@ -36,3 +36,6 @@ rosdep init && rosdep update
 # setup env
 echo "source /opt/ros/kinetic/setup.bash" >> ~/.bashrc
 source ~/.bashrc
+
+catkin_make install
+
