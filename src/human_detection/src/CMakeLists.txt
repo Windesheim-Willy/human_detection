@@ -43,7 +43,7 @@ include_directories(
   ${OpenCV_INCLUDE_DIRS}
 )
 
-add_executable(main
+add_executable(human_detection
 
 	main.cpp
 	Tracking/Rectangle.cpp
@@ -51,13 +51,13 @@ add_executable(main
   OpenCVTracking.cpp
 )
 
-add_dependencies(main 
+add_dependencies(human_detection 
 
   human_detection_generate_messages_cpp 
   ${catkin_EXPORTED_TARGETS}
 )
 
-target_link_libraries(main 
+target_link_libraries(human_detection 
 
     ${catkin_LIBRARIES}
     ${Boost_INCLUDE_DIRS}
@@ -65,6 +65,6 @@ target_link_libraries(main
 )
 
 install( TARGETS
-    main
+    human_detection
     DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
