@@ -31,8 +31,7 @@ apt-get install -y \
   ros-kinetic-desktop  
 
 # setup env
-echo "source /opt/ros/kinetic/setup.bash" >> ~/.bashrc
-source ~/.bashrc
+source /opt/ros/kinetic/setup.bash
 
 catkin_make install
 
