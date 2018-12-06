@@ -35,3 +35,5 @@ source /opt/ros/kinetic/setup.bash
 
 catkin_make install
 
+# install the stuff
+source install/setup.bash
