@@ -1,0 +1,12 @@
+{
+    "files.associations": {
+        "vector": "cpp",
+        "thread": "cpp"
+    },
+    "ros.distro": "kinetic",
+    "C_Cpp.errorSquiggles": "Enabled",
+    "python.autoComplete.extraPaths": [
+        "/home/willy/Documents/willy/components/human_detection/devel/lib/python2.7/dist-packages",
+        "/opt/ros/kinetic/lib/python2.7/dist-packages"
+    ]
+}

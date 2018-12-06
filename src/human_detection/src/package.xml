@@ -1,0 +1,17 @@
+<package format="2">
+    <name>human_detection</name>
+    <version>0.1.0</version>
+    <description>
+        A package to find humans to detected humans with Haarcascades (and estimating their distance) on a webcam.
+    </description>
+    <maintainer email="s1097616@student.windesheim.nl">Johnny Borg</maintainer>
+    <license>BSD</license>
+
+    <buildtool_depend>catkin</buildtool_depend>
+    
+    <build_depend>message_generation</build_depend>
+
+    <exec_depend>message_runtime</exec_depend>
+    <exec_depend>human_detection_generate_messages_cpp</exec_depend>
+    
+</package>
