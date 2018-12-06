@@ -30,9 +30,6 @@ apt-get install -y \
   ros-kinetic-cv-bridge \
   ros-kinetic-desktop  
 
-# bootstrap rosdep
-rosdep init && rosdep update
-
 # setup env
 echo "source /opt/ros/kinetic/setup.bash" >> ~/.bashrc
 source ~/.bashrc
