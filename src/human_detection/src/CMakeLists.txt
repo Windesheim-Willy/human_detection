@@ -63,3 +63,8 @@ target_link_libraries(human_detection
     ${Boost_INCLUDE_DIRS}
     ${OpenCV_LIBRARIES}
 )
+
+install( TARGETS
+    human_detection
+    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)

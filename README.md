@@ -1,5 +1,5 @@
 # human_detection
-$ apt get install ros-kinetic-opencv3 ros-kinetic-cv-bridge
+$ apt get install ros-kinetic-opencv3 ros-kinetic-cv-bridge ros-kinetic-desktop
 $ rosdep init
 $ rosdep update
 
