@@ -1,8 +1,8 @@
 #!/bin/bash
-DAEMON=/opt/willy/components/speech_recognition/start_recognition.sh
-NAME=speech_recognition
-ROSCORE_LOG=/var/log/speech_recognition.log
-ROSCORE_ERR=/var/log/speech_recognition.err
+DAEMON=/opt/willy/components/human_detection/human_detection.sh
+NAME=human_detection
+ROSCORE_LOG=/var/log/human_detection.log
+ROSCORE_ERR=/var/log/human_detection.err
 PIDFILE=/var/run/$NAME.pid
 . /opt/ros/kinetic/setup.sh
 date >> $ROSCORE_LOG
