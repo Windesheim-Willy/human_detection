@@ -68,3 +68,8 @@ install( TARGETS
     human_detection
     DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
+
+install(FILES
+  ${PROJECT_NAME}/launch/human_detection.launch
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+)
