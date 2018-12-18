@@ -14,7 +14,6 @@ int main(int argc, char **argv)
 
     OpenCVTracking tracker("/dev/video1");
     std_msgs::String tracked;
-    std::stringstream concatString;
 
     while(tracker.isValid() && ros::ok()) 
     {
@@ -25,6 +24,7 @@ int main(int argc, char **argv)
         for (vector<Rectangle*>::iterator it = rects.begin(); it != rects.end();) {
             Rectangle *rect = (*it);
 
+            std::stringstream concatString;
             concatString << rect->getId() << "," << rect->accuracy() << "," << rect->getDistance();
             tracked.data = concatString.str();
 
