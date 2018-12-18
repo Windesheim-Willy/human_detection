@@ -12,7 +12,7 @@ int main(int argc, char **argv)
     ros::NodeHandle n;
     ros::Publisher detectionTopic = n.advertise<human_detection::Person>("human_dect", 1);
 
-    OpenCVTracking tracker("/dev/video");
+    OpenCVTracking tracker("/dev/video1");
     human_detection::Person tracked; 
 
     while(tracker.isValid() && ros::ok()) 
