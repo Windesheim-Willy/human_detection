@@ -38,7 +38,7 @@ catkin_make -DCMAKE_INSTALL_PREFIX=/opt/ros/kinetic install
 # install the stuff
 source /opt/ros/kinetic/setup.bash
 
+catkin_make
+
 chown -R willy:willy devel
 chown -R willy:willy build
-
-su - willy -c catkin_make
