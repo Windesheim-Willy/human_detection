@@ -39,9 +39,9 @@ chown -R willy:willy devel
 chown -R willy:willy build
 chown -R willy:willy install
 
-catkin_make instal
+catkin_make install
 
 # catkin_make -DCMAKE_INSTALL_PREFIX=/opt/ros/kinetic install
 
 # install the stuff
-# source /opt/ros/kinetic/setup.bash
+source /opt/ros/kinetic/setup.bash
