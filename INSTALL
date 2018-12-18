@@ -41,4 +41,4 @@ source /opt/ros/kinetic/setup.bash
 chown -R willy:willy devel
 chown -R willy:willy build
 
-su- willy -c catkin_make
+su - willy -c catkin_make
