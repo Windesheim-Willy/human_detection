@@ -12,11 +12,11 @@ int main(int argc, char **argv)
     ros::NodeHandle n;
     ros::Publisher detectionTopic = n.advertise<std_msgs::String>("human_dect", 1);
 
-    OpenCVTracking tracker("/dev/video1");
+    OpenCVTracking tracker(VIDEO_INPUT);
     std_msgs::String tracked;
 
     if (!tracker.isValid()) {
-        cout << "could not read capture device, does /dev/video1 exist and is it readable?" << endl;
+        cout << "could not read capture device, does " << VIDEO_INPUT << " exist and is it readable?" << endl;
     }
 
     if (!ros::ok()) {
