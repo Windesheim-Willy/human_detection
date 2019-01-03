@@ -3,5 +3,6 @@
 
 #define DEBUG false
 #define VIDEO_INPUT "/dev/video0"
+#define FREQUENCY 10
 
 #endif

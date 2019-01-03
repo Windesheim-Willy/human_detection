@@ -12,6 +12,8 @@ int main(int argc, char **argv)
     ros::NodeHandle n;
     ros::Publisher detectionTopic = n.advertise<std_msgs::String>("human_dect", 1);
 
+    ros::Rate loop_rate(FREQUENCY);
+
     OpenCVTracking tracker(VIDEO_INPUT);
     std_msgs::String tracked;
 
@@ -41,6 +43,7 @@ int main(int argc, char **argv)
             it++;
         }
 
-        ros::spinOnce();       
+        ros::spinOnce();
+        loop_rate.sleep();
     }
 }
