@@ -15,6 +15,14 @@ int main(int argc, char **argv)
     OpenCVTracking tracker("/dev/video1");
     std_msgs::String tracked;
 
+    if (!tracker.isValid()) {
+        cout << "could not read capture device, does /dev/video1 exist and is it readable?" << endl;
+    }
+
+    if (!ros::ok()) {
+        cout << "ros is not ok, did you start the roscore?" << endl;
+    }
+
     while(tracker.isValid() && ros::ok()) 
     {
         tracker.process();   
