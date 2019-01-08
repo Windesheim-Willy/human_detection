@@ -3,6 +3,7 @@
 RectangleTracker::RectangleTracker()
 {
     this->ticks = 0;
+    this->detectedCount = 0;
 }
 
 void RectangleTracker::update(vector<Rect> &foundRectangles)
