@@ -2,7 +2,8 @@
 #define HUMAN_DETECT_MAIN
 
 #define DEBUG false
-#define VIDEO_INPUT "/dev/willy_camera"
+#define VIDEO_INPUT "/dev/video0"
+#define CASCADE_PATH "../Documents/willy/components/human_detection/opencv/haar-upper-body.xml"
 #define FREQUENCY 10
 
 #endif

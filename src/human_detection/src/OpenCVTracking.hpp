@@ -15,9 +15,10 @@ using namespace std;
 class OpenCVTracking 
 {
     public: 
-        OpenCVTracking(const string &filename);
+        OpenCVTracking(const string &video, const string &cascade);
 
-        bool isValid();
+        bool isValidCascade();
+        bool isValidVideo();
         void process();
 
         RectangleTracker &getTracker();

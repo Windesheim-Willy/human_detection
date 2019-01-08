@@ -14,18 +14,22 @@ int main(int argc, char **argv)
 
     ros::Rate loop_rate(FREQUENCY);
 
-    OpenCVTracking tracker(VIDEO_INPUT);
+    OpenCVTracking tracker(VIDEO_INPUT, CASCADE_PATH);
     std_msgs::String tracked;
 
-    if (!tracker.isValid()) {
+    if (!tracker.isValidVideo()) {
         cout << "could not read capture device, does " << VIDEO_INPUT << " exist and is it readable?" << endl;
+    }
+
+    if (!tracker.isValidCascade()) {
+        cout << "could not read cascade file, does " << CASCADE_PATH << " exist and is it readable?" << endl;
     }
 
     if (!ros::ok()) {
         cout << "ros is not ok, did you start the roscore?" << endl;
     }
 
-    while(tracker.isValid() && ros::ok()) 
+    while(tracker.isValidVideo() && tracker.isValidCascade() && ros::ok()) 
     {
         tracker.process();   
 
