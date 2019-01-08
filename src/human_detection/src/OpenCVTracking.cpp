@@ -12,15 +12,20 @@
 using namespace cv;
 using namespace std;
 
-OpenCVTracking::OpenCVTracking(const string &filename) 
+OpenCVTracking::OpenCVTracking(const string &video, const string &cascade)
 {
-    this->capture = new VideoCapture(filename);
-    valid = detectBody.load("opencv/haar-upper-body.xml");
+    this->capture = new VideoCapture(video);
+    valid = detectBody.load(cascade);
 }
 
-bool OpenCVTracking::isValid()
+bool OpenCVTracking::isValidCascade()
 {
     return this->valid;
+}
+
+bool OpenCVTracking::isValidVideo()
+{
+    return capture->grab();
 }
 
 void OpenCVTracking::process()
